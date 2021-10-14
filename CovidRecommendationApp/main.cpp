@@ -1,6 +1,8 @@
 #include "Menu.h"
 #include "Database.h"
 
+#include <iostream>
+
 using namespace CovidRecommendationApp;
 
 int main() {
@@ -15,10 +17,11 @@ int main() {
 
 	Menu menu;
 	char selection = 0;
-	while (selection != 6)
+	while (selection != '6')
 	{
-		selection = menu.displayMenu();
-		menu.menuSelect(selection);
+		menu.displayMenu();
+		cin >> selection;
+		cout << menu.menuSelect(selection);
 	}
 	
 	return 0;

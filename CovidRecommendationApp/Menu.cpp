@@ -4,18 +4,15 @@
 using namespace CovidRecommendationApp;
 using namespace std;
 
-char Menu::displayMenu()
+void Menu::displayMenu()
 {
 	cout << "Enter your choice" << endl;
-	cout << "1. Enter user covid information" << endl;
-	cout << "2. Enter covid test results" << endl;
-	cout << "3. Update high risk location" << endl;
-	cout << "4. Update positive patient details" << endl;
-	cout << "5. Display positive patient details" << endl;
-	cout << "6. Close" << endl;
-	char selection;
-	cin >> selection;
-	return selection;
+	cout << "1. Enter your detail for COVID test recommendation" << endl;
+	cout << "2. Submit your COVID test status & update the Location database" << endl;
+	cout << "3. Display the updated location (High risk for COVID)" << endl;
+	cout << "4. Update COVID patient details" << endl;
+	cout << "5. Display the COVID positive patient detail" << endl;
+	cout << "6. Quit" << endl;
 }
 
 string Menu::menuSelect(char selection)

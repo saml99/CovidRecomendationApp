@@ -3,6 +3,7 @@
 #include "../CovidRecommendationApp/Menu.h"
 
 #include <string>
+#include <iostream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace CovidRecommendationApp;
