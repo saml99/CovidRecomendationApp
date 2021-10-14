@@ -11,14 +11,14 @@ using namespace std;
 
 namespace CovidRecommendationAppTests
 {
-	TEST_CLASS(CovidRecommendationAppTests)
+	TEST_CLASS(MenuTests)
 	{
 	public:
 
 		TEST_METHOD(TestUnknownMenuInput)
 		{
 			Menu menu;
-			string actualResult = menu.menuSelect(0);
+			string actualResult = menu.menuSelect('0');
 			string explectedResult = "Unknown selection, please try again";
 			Assert::AreEqual(actualResult, explectedResult);
 		}
