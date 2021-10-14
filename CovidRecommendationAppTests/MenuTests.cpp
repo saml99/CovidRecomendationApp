@@ -10,7 +10,7 @@ using namespace std;
 
 namespace CovidRecommendationAppTests
 {
-	TEST_CLASS(CovidRecommendationAppTests)
+	TEST_CLASS(MenuTests)
 	{
 	public:
 
