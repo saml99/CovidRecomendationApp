@@ -3,6 +3,7 @@
 #include "../CovidRecommendationApp/Menu.h"
 
 #include <string>
+#include <iostream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace CovidRecommendationApp;
@@ -25,7 +26,7 @@ namespace CovidRecommendationAppTests
 		TEST_METHOD(TestCloseMenu)
 		{
 			Menu menu;
-			string actualResult = menu.menuSelect(6);
+			string actualResult = menu.menuSelect('6');
 			string explectedResult = "Goodbye";
 			Assert::AreEqual(actualResult, explectedResult);
 		}
