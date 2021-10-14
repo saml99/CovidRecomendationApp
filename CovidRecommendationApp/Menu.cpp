@@ -22,17 +22,17 @@ string Menu::menuSelect(char selection)
 {
 	switch (selection)
 	{
-	case 1:
+	case '1':
 		return "User info";
-	case 2:
+	case '2':
 		return "Test results";
-	case 3:
+	case '3':
 		return "High resk locations";
-	case 4:
+	case '4':
 		return "Update positive patient";
-	case 5:
+	case '5':
 		return "Display positive patient";
-	case 6:
+	case '6':
 		return "Goodbye";
 	default:
 		return "Unknown selection, please try again";

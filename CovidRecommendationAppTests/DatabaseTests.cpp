@@ -4,6 +4,7 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace CovidRecommendationApp;
@@ -19,9 +20,9 @@ namespace CovidRecommendationAppTests
 		{
 			Database database;
 			string actual;
-			string expected = "PatientID\tName\tDate of Birth\tAddress\tVisited Location\tDate/Time\tLast Overseas Travel\tCovid Test\tStatus";
+			string expected = "PatientID\tName\tDate of Birth\tAddress\tVisited Location\tDate/Time\tLast Overseas Travel\tCovid Test\tStatus\t";
 			string file = "PatientDetailTable.txt";
-			string headers[9] = {"PatientID", "Name", "Date of Birth", "Address", "Visited Location", "Date/Time", "Last Overseas Travel", "Covid Test", "Status"};
+			vector<string> headers = {"PatientID", "Name", "Date of Birth", "Address", "Visited Location", "Date/Time", "Last Overseas Travel", "Covid Test", "Status"};
 			database.createTable(file, headers);
 			ifstream myfile(file);
 			getline(myfile, actual);

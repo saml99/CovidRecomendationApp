@@ -17,7 +17,7 @@ namespace CovidRecommendationAppTests
 		TEST_METHOD(TestUnknownMenuInput)
 		{
 			Menu menu;
-			string actualResult = menu.menuSelect(0);
+			string actualResult = menu.menuSelect('0');
 			string explectedResult = "Unknown selection, please try again";
 			Assert::AreEqual(actualResult, explectedResult);
 		}
@@ -25,7 +25,7 @@ namespace CovidRecommendationAppTests
 		TEST_METHOD(TestCloseMenu)
 		{
 			Menu menu;
-			string actualResult = menu.menuSelect(6);
+			string actualResult = menu.menuSelect('6');
 			string explectedResult = "Goodbye";
 			Assert::AreEqual(actualResult, explectedResult);
 		}

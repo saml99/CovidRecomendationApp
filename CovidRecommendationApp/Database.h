@@ -1,5 +1,7 @@
 #pragma once
+
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -9,6 +11,6 @@ namespace CovidRecommendationApp {
 	{
 
 	public:
-		void createTable(string file, string headers[]);
+		void createTable(string file, vector<string> headers);
 	};
 }

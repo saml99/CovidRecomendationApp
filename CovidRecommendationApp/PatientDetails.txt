@@ -1,0 +1,1 @@
+PatientID	Name	Date of Birth	Address	Visited Location	Date/Time	Last Overseas Travel	Covid Test	Status	
