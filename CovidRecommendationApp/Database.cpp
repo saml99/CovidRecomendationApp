@@ -4,20 +4,25 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <stdio.h>
 
 using namespace CovidRecommendationApp;
 using namespace std;
 
 void Database::createTable(string file, vector<string> headers)
 {
-	fstream createfile;
-	createfile.open(file, fstream::in | fstream::out);
+	ofstream datafile;
+	ifstream readfile;
+	string line;
+	datafile.open(file);
+	readfile.open(file);
 
-	if (!createfile) 
+	if (!datafile) 
 	{
-		ofstream datafile;
-		datafile.open(file);
-
+		cout << "Could not connect to database." << endl;
+	}
+	else if (!getline(readfile, line))
+	{
 		for (int i = 0; i < headers.size(); i++)
 		{
 			datafile << headers[i] << ',';
@@ -27,7 +32,7 @@ void Database::createTable(string file, vector<string> headers)
 	}
 }
 
-void Database::insertTable(string file, map<string, string> values)
+void Database::insertRow(string file, map<string, string> values)
 {
 	ofstream datafile;
 	ifstream readfile;
@@ -110,4 +115,62 @@ map<string, string> Database::getRow(string file, string ID)
 	}
 
 	return map;
+}
+
+void Database::updateRow(string file, string ID, map<string, string> valuesToUpdate)
+{
+	ifstream readfile;
+	readfile.open(file);
+	ofstream datafile;
+	datafile.open("temp.txt");
+	string headers;
+	string oldrow;
+	string newrow;
+	map<string, string> map = getRow(file, ID);
+	for (std::map<string, string>::iterator it = valuesToUpdate.begin(); it != valuesToUpdate.end(); ++it)
+	{
+		map.at(it->first) = it->second;
+	}
+
+	getline(readfile, headers);
+	datafile << headers << endl;
+	string delimiter = ",";
+	int start = 0;
+	int end = headers.find(delimiter);
+	for (int i = 0; i < end; i++)
+	{
+		string header = headers.substr(start, end - start);
+		if (map.find(header) == map.end())
+		{
+			newrow = newrow + ",";
+		}
+		else
+		{
+			newrow = newrow + map.at(header) + ",";
+		}
+
+		start = end + delimiter.size();
+		end = headers.find(delimiter, start);
+	}
+	
+	while (getline(readfile, oldrow))
+	{
+		string delimiter = ",";
+		int start = 0;
+		int end = oldrow.find(delimiter);
+		if (oldrow.substr(start, end - start) == ID)
+		{
+			oldrow.replace(oldrow.find(oldrow), oldrow.length(), newrow);
+			datafile << oldrow << endl;
+		}
+		else
+		{
+			datafile << oldrow << endl;
+		}
+	}
+
+	readfile.close();
+	datafile.close();
+	remove(file.c_str());
+	rename("temp.txt", file.c_str());
 }
