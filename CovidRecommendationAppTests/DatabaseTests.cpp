@@ -48,5 +48,20 @@ namespace CovidRecommendationAppTests
 			Assert::AreEqual(actual, expected);
 			myfile.close();
 		}
+
+		TEST_METHOD(TestGetRow)
+		{
+			Database database;
+			map<string, string> actual;
+			map<string, string> expected{ {"PatientID", "1"}, {"Name", "Sam"}, {"Date of Birth", "26/08/1999"}, {"Address", "some st"}, {"LocationID", "1"}, {"Date/Time", "16/10/2021 22:32:26"}, {"Last Overseas Travel", "No"}, {"Covid Test", "Negative"}, {"Status", "Alive"} };
+			string file = "PatientDetailTable.txt";
+			map<string, string> values{ {"PatientID", "1"}, {"Name", "Sam"}, {"Date of Birth", "26/08/1999"}, {"Address", "some st"}, {"LocationID", "1"}, {"Date/Time", "16/10/2021 22:32:26"}, {"Last Overseas Travel", "No"}, {"Covid Test", "Negative"}, {"Status", "Alive"} };
+			vector<string> headers = { "PatientID", "Name", "Date of Birth", "Address", "LocationID", "Date/Time", "Last Overseas Travel", "Covid Test", "Status" };
+			string ID = "1";
+			database.createTable(file, headers);
+			database.insertTable(file, values);
+			actual = database.getRow(file, ID);
+			Assert::IsTrue(actual == expected);
+		}
 	};
 }

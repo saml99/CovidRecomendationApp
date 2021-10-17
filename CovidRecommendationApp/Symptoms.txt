@@ -1,1 +1,1 @@
-Low Risk,Medium Risk,High Risk,
+Symptom,Risk Level,
