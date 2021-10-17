@@ -15,11 +15,13 @@ int main() {
 	database.createTable("Symptoms.txt", symptoms);
 	database.createTable("Locations.txt", locations);
 
-	map<string, string> values{ {"PatientID", "1"}, {"Name", "Sam"}, {"Date of Birth", "26/08/1999"}, {"Address", "some st"}, {"LocationID", "1"}, {"Date/Time", "16/10/2021 22:32:26"}, {"Last Overseas Travel", "No"}, {"Covid Test", "Negative"} };
-	//database.insertTable("PatientDetails.txt", values);
+	//map<string, string> values{ {"PatientID", "1"}, {"Name", "Sam"}, {"Date of Birth", "26/08/1999"}, {"Address", "some st"}, {"LocationID", "1"}, {"Date/Time", "16/10/2021 22:32:26"}, {"Last Overseas Travel", "No"}, {"Covid Test", "Negative"} };
+	//database.insertRow("PatientDetails.txt", values);
 
-	map<string, string> map;
-	map = database.getRow("PatientDetails.txt", "1");
+	map<string, string> valuesToUpdate{ {"Status", "Alive"} };
+	//map = database.getRow("PatientDetails.txt", "1");
+
+	//database.updateRow("PatientDetails.txt", "1", valuesToUpdate);
 
 	Menu menu;
 	char selection = 0;

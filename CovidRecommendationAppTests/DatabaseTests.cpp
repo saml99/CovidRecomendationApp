@@ -41,7 +41,7 @@ namespace CovidRecommendationAppTests
 			map<string, string> values { {"PatientID", "1"}, {"Name", "Sam"}, {"Date of Birth", "26/08/1999"}, {"Address", "some st"}, {"LocationID", "1"}, {"Date/Time", "16/10/2021 22:32:26"}, {"Last Overseas Travel", "No"}, {"Covid Test", "Negative"}, {"Status", "Alive"} };
 			vector<string> headers = { "PatientID", "Name", "Date of Birth", "Address", "LocationID", "Date/Time", "Last Overseas Travel", "Covid Test", "Status" };
 			database.createTable(file, headers);
-			database.insertTable(file, values);
+			database.insertRow(file, values);
 			ifstream myfile(file);
 			getline(myfile, actual);
 			getline(myfile, actual);
@@ -59,9 +59,28 @@ namespace CovidRecommendationAppTests
 			vector<string> headers = { "PatientID", "Name", "Date of Birth", "Address", "LocationID", "Date/Time", "Last Overseas Travel", "Covid Test", "Status" };
 			string ID = "1";
 			database.createTable(file, headers);
-			database.insertTable(file, values);
+			database.insertRow(file, values);
 			actual = database.getRow(file, ID);
 			Assert::IsTrue(actual == expected);
+		}
+
+		TEST_METHOD(TestUpdateRow)
+		{
+			Database database;
+			string actual;
+			string expected = "1,Sam,26/08/1999,some st,1,16/10/2021 22:32:26,No,Negative,Alive,";
+			string file = "PatientDetailTable.txt";
+			string ID = "1";
+			map<string, string> valuesToUpdate{ {"Status", "Alive"} };
+			map<string, string> values{ {"PatientID", "1"}, {"Name", "Sam"}, {"Date of Birth", "26/08/1999"}, {"Address", "some st"}, {"LocationID", "1"}, {"Date/Time", "16/10/2021 22:32:26"}, {"Last Overseas Travel", "No"}, {"Covid Test", "Negative"} };
+			vector<string> headers = { "PatientID", "Name", "Date of Birth", "Address", "LocationID", "Date/Time", "Last Overseas Travel", "Covid Test", "Status" };
+			database.createTable(file, headers);
+			database.insertRow(file, values);
+			database.updateRow(file, ID, valuesToUpdate);
+			ifstream myfile(file);
+			getline(myfile, actual);
+			getline(myfile, actual);
+			Assert::AreEqual(actual, expected);
 		}
 	};
 }
