@@ -11,18 +11,19 @@ using namespace std;
 
 void Database::createTable(string file, vector<string> headers)
 {
-	ofstream datafile;
 	ifstream readfile;
 	string line;
-	datafile.open(file);
 	readfile.open(file);
 
-	if (!datafile) 
+	if (!readfile) 
 	{
 		cout << "Could not connect to database." << endl;
 	}
-	else if (!getline(readfile, line))
+	getline(readfile, line);
+	if (line == "")
 	{
+		ofstream datafile;
+		datafile.open(file);
 		for (int i = 0; i < headers.size(); i++)
 		{
 			datafile << headers[i] << ',';
@@ -115,6 +116,51 @@ map<string, string> Database::getRow(string file, string ID)
 	}
 
 	return map;
+}
+
+vector<map<string, string>> Database::getRows(string file)
+{
+	ifstream datafile;
+	string line;
+	vector<map<string, string>> rows;
+	map<string, string> map;
+	vector<string> keys;
+	datafile.open(file);
+	if (datafile.is_open())
+	{
+		getline(datafile, line);
+		string delimiter = ",";
+		int start = 0;
+		int end = line.find(delimiter);
+		for (int i = 0; i < end; i++)
+		{
+			string key = line.substr(start, end - start);
+			keys.push_back(key);
+			map.insert(pair<string, string>(key, ""));
+			start = end + delimiter.size();
+			end = line.find(delimiter, start);
+		}
+
+		while (getline(datafile, line))
+		{
+			string delimiter = ",";
+			int start = 0;
+			int end = line.find(delimiter);
+			for (int i = 0; i < end; i++)
+			{
+				string value = line.substr(start, end - start);
+				map.at(keys[i]) = value;
+				start = end + delimiter.size();
+				end = line.find(delimiter, start);
+			}
+			rows.push_back(map);
+		}
+	}
+	else
+	{
+		cout << "Unable to open file" << endl;
+	}
+	return rows;
 }
 
 void Database::updateRow(string file, string ID, map<string, string> valuesToUpdate)

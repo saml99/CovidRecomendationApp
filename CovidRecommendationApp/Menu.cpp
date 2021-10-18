@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "PatientDetailsInputService.h"
 #include <iostream>
 
 using namespace CovidRecommendationApp;
@@ -20,6 +21,8 @@ string Menu::menuSelect(char selection)
 	switch (selection)
 	{
 	case '1':
+		PatientDetailsInputService patientDetailsInputService;
+		patientDetailsInputService.enterDetails();
 		return "User info";
 	case '2':
 		return "Test results";
