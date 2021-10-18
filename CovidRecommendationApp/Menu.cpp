@@ -1,9 +1,13 @@
 #include "Menu.h"
 #include "PatientDetailsInputService.h"
 #include <iostream>
+#include "Database.h"
+#include <map>
+#include <vector>
 
 using namespace CovidRecommendationApp;
 using namespace std;
+
 
 void Menu::displayMenu()
 {
@@ -24,16 +28,19 @@ void Menu::menuSelect(char selection)
 		PatientDetailsInputService patientDetailsInputService;
 		patientDetailsInputService.enterDetails();
 	case '2':
-		
+		patientDetailsInputService.covidResult();
+
 	case '3':
-		
+
 	case '4':
-		
+
 	case '5':
-		
+
 	case '6':
 		cout << "Goodbye" << endl;
 	default:
 		cout << "Unknown selection, please try again" << endl;
 	}
+
 }
+
