@@ -1,3 +1,4 @@
 Symptom,Risk Level,
-fever,Low Risk,
-dry cough,Low Risk,
+fever,High Risk,
+dry cough,High Risk,
+diarrhoea,Medium Risk,

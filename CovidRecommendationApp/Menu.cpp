@@ -16,25 +16,24 @@ void Menu::displayMenu()
 	cout << "6. Quit" << endl;
 }
 
-string Menu::menuSelect(char selection)
+void Menu::menuSelect(char selection)
 {
 	switch (selection)
 	{
 	case '1':
 		PatientDetailsInputService patientDetailsInputService;
 		patientDetailsInputService.enterDetails();
-		return "User info";
 	case '2':
-		return "Test results";
+		
 	case '3':
-		return "High resk locations";
+		
 	case '4':
-		return "Update positive patient";
+		
 	case '5':
-		return "Display positive patient";
+		
 	case '6':
-		return "Goodbye";
+		cout << "Goodbye" << endl;
 	default:
-		return "Unknown selection, please try again";
+		cout << "Unknown selection, please try again" << endl;
 	}
 }

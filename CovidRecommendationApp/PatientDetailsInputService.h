@@ -13,6 +13,7 @@ namespace CovidRecommendationApp
 		void enterDetails();
 	private:
 		bool isNumber(string str);
+		void recommendation();
 	};
 
 }
