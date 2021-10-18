@@ -5,9 +5,11 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <vector>
 
 using namespace CovidRecommendationApp;
 using namespace std;
+
 
 void Menu::displayMenu()
 {
@@ -37,7 +39,8 @@ void Menu::menuSelect(char selection)
 		PatientDetailsInputService patientDetailsInputService;
 		patientDetailsInputService.enterDetails();
 	case '2':
-		
+		patientDetailsInputService.covidResult();
+
 	case '3':
 		database.getRows("Locations.txt");
 		break;
@@ -82,4 +85,6 @@ void Menu::menuSelect(char selection)
 	default:
 		cout << "Unknown selection, please try again" << endl;
 	}
+
 }
+
