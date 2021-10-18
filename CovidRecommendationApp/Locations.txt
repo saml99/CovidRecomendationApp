@@ -1,3 +1,4 @@
-ID,Description,
-1,Auburn Train Station,
-2,Royal Hotel,
+Description,
+Auburn Train Station,
+Royal Hotel,
+Melbourne central,

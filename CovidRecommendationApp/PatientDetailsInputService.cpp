@@ -48,9 +48,10 @@ void PatientDetailsInputService::covidResult()
 {
 	Database database;
 	map<string, string> patientDetails;
+	map<string, string> locations;
 	string ID;
 	string TestStatus;
-	string VisitedLocations;
+	string VisitedLocation;
 
 	cout << "Enter Patient ID:" << endl;
 	cin >> ID;
@@ -58,19 +59,22 @@ void PatientDetailsInputService::covidResult()
 	{
 		cout << "Patient ID must be a number. Please try agian." << endl;
 	}
-	patientDetails.insert({ "PatientID", ID });
 	cout << "Enter test Status: (Positive/Negative)" << endl;
 	cin >> TestStatus;
-	patientDetails.insert({ "Test Status", TestStatus });
-	database.insertRow("PatientDetails.txt", patientDetails);
+	patientDetails.insert({ "Covid Test", TestStatus });
+	database.updateRow("PatientDetails.txt", ID, patientDetails);
 
 	if (TestStatus == "Positive")
 	{
-		cout << "Enter the locations you have visited:" << endl;
-		cin >> VisitedLocations;
-
-		patientDetails.insert({ "Updated high risk locations", VisitedLocations });
-		database.insertRow("Locations.txt", patientDetails);
+		cout << "Enter the locations you have visited: (type done when all locations are entered)" << endl;
+		cin.ignore();
+		getline(cin, VisitedLocation);
+		while (VisitedLocation != "done")
+		{
+			locations.insert({ "Description", VisitedLocation });
+			database.insertRow("Locations.txt", locations);
+			getline(cin, VisitedLocation);
+		}
 	}
 	else (TestStatus == "Negative");
 	{
