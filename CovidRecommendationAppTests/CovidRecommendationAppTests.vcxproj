@@ -100,7 +100,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\sam.lewis\Documents\CovidRecomendationApp\CovidRecommendationApp\x64\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Menu.obj;Database.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Menu.obj;Database.obj;PatientDetailsInputService.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

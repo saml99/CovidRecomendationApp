@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 using namespace std;
@@ -10,6 +11,6 @@ namespace CovidRecommendationApp {
 	
 	public:
 		void displayMenu();
-		void menuSelect(char selection);
+		string menuSelect(char selection);
 	};
 }

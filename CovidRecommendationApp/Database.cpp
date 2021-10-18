@@ -15,11 +15,13 @@ void Database::createTable(string file, vector<string> headers)
 	string line;
 	readfile.open(file);
 
+	//check if file exists
 	if (!readfile) 
 	{
 		cout << "Could not connect to database." << endl;
 	}
 	getline(readfile, line);
+	//Write column headers to the file if they don't exist
 	if (line == "")
 	{
 		ofstream datafile;
@@ -41,6 +43,7 @@ void Database::insertRow(string file, map<string, string> values)
 	readfile.open(file);
 	string headers;
 
+	//check if file exists
 	if (!datafile)
 	{
 		cout << "Issue connecting to database" << endl;
@@ -48,23 +51,24 @@ void Database::insertRow(string file, map<string, string> values)
 	else
 	{
 		getline(readfile, headers);
-		string delimiter = ",";
+		string delimiter = ","; //sets "," as a delimiter
 		int start = 0;
 		int end = headers.find(delimiter);
+		//creates substrings split by the delimiter
 		for (int i = 0; i < end; i++)
 		{
-			string header = headers.substr(start, end - start);
-			if (values.find(header) == values.end())
+			string header = headers.substr(start, end - start); //gets the string between delimiter
+			if (values.find(header) == values.end()) //add a , to the end of the line if this is the last element in the map
 			{
 				datafile << ",";
 			}
 			else
 			{
-				datafile << values.at(header) << ",";
+				datafile << values.at(header) << ","; //Write the values from the map to the database based on header key
 			}
 			
-			start = end + delimiter.size();
-			end = headers.find(delimiter, start);
+			start = end + delimiter.size(); //move to the next delimiter
+			end = headers.find(delimiter, start); 
 		}
 		datafile << endl;
 		datafile.close();
@@ -78,8 +82,10 @@ map<string, string> Database::getRow(string file, string ID)
 	map<string, string> map;
 	vector<string> keys;
 	datafile.open(file);
+	//Check file is open
 	if (datafile.is_open())
 	{
+		//Stores the column headers in a vector
 		getline(datafile, line);
 		string delimiter = ",";
 		int start = 0;
@@ -93,6 +99,7 @@ map<string, string> Database::getRow(string file, string ID)
 			end = line.find(delimiter, start);
 		}
 
+		//Searches through file to find the specified ID
 		while (getline(datafile, line))
 		{
 			string delimiter = ",";
@@ -103,7 +110,7 @@ map<string, string> Database::getRow(string file, string ID)
 				for (int i = 0; i < end; i++)
 				{
 					string value = line.substr(start, end - start);
-					map.at(keys[i]) = value;
+					map.at(keys[i]) = value; //Maps the value from the substring to the correct collumn header
 					start = end + delimiter.size();
 					end = line.find(delimiter, start);
 				}
@@ -118,6 +125,7 @@ map<string, string> Database::getRow(string file, string ID)
 	return map;
 }
 
+// This function works the same a the getRow function but returns a vector of maps instead of a map based on a specific ID
 vector<map<string, string>> Database::getRows(string file)
 {
 	ifstream datafile;
@@ -172,12 +180,13 @@ void Database::updateRow(string file, string ID, map<string, string> valuesToUpd
 	string headers;
 	string oldrow;
 	string newrow;
-	map<string, string> map = getRow(file, ID);
+	map<string, string> map = getRow(file, ID); //Finds the row that needs to be updated
 	for (std::map<string, string>::iterator it = valuesToUpdate.begin(); it != valuesToUpdate.end(); ++it)
 	{
-		map.at(it->first) = it->second;
+		map.at(it->first) = it->second; //Maps the values that need updating to the correct headers in the database and sets the value in the row
 	}
 
+	//Rewrites the values from the map to a string to be added to the file
 	getline(readfile, headers);
 	datafile << headers << endl;
 	string delimiter = ",";
@@ -199,6 +208,7 @@ void Database::updateRow(string file, string ID, map<string, string> valuesToUpd
 		end = headers.find(delimiter, start);
 	}
 	
+	//Rewrites all the lines to a new file then replacing the old row with the updated row
 	while (getline(readfile, oldrow))
 	{
 		string delimiter = ",";
@@ -217,6 +227,6 @@ void Database::updateRow(string file, string ID, map<string, string> valuesToUpd
 
 	readfile.close();
 	datafile.close();
-	remove(file.c_str());
-	rename("temp.txt", file.c_str());
+	remove(file.c_str()); //Remove the old file
+	rename("temp.txt", file.c_str()); //Rename the file to the old file
 }
