@@ -40,37 +40,8 @@ void PatientDetailsInputService::enterDetails()
 	cout << "Have you traveled overseas recently? yes/no" << endl;
 	cin >> overseas;
 	patientDetails.insert({ "Last Overseas Travel", overseas });
-	cout << "Which of the following symptoms are you experiencing? Type 0 when finished entering symptoms" << endl;
-	vector < map<string, string> > rows = database.getRows("Symptoms.txt");
-	for (int i = 0; i < rows.size(); i++)
-	{
-		cout << rows[i].at("Symptom") << endl;
-	}
-	string input_text;
-	bool highRisk = false;
-	getline(cin, input_text);
-	while (input_text != "0")
-	{
-		map<string, string> row = database.getRow("Symptoms.txt", input_text);
-		if (row.at("Symptom") == input_text)
-		{
-			if (row.at("Risk Level") == "High Risk")
-			{
-				highRisk = true;
-			}
-		}
-		else
-		{
-			cout << "Entry is not a valid symptom" << endl;
-		}
-		getline(cin, input_text);
-	}
-	cout << "Have you visited any of the following locations?" << endl;
-	vector < map<string, string> > rows = database.getRows("Locations.txt");
-	for (int i = 0; i < rows.size(); i++)
-	{
-		cout << rows[i].at("Description") << endl;
-	}
+	database.insertRow("PatientDetails.txt", patientDetails);
+	recommendation();
 }
 
 bool PatientDetailsInputService::isNumber(string str)
@@ -83,4 +54,60 @@ bool PatientDetailsInputService::isNumber(string str)
 		}
 	}
 	return true;
+}
+
+void PatientDetailsInputService::recommendation()
+{
+	Database database;
+	cout << "Which of the following symptoms are you experiencing? Type 0 when finished entering symptoms" << endl;
+	vector < map<string, string> > rows = database.getRows("Symptoms.txt");
+	for (int i = 0; i < rows.size(); i++)
+	{
+		cout << rows[i].at("Symptom") << endl;
+	}
+	string input_text;
+	bool highRisk = false;
+	getline(cin, input_text);
+	while (input_text != "0")
+	{
+		map<string, string> symptoms = database.getRow("Symptoms.txt", input_text);
+		if (symptoms.at("Symptom") == input_text)
+		{
+			if (symptoms.at("Risk Level") == "High Risk")
+			{
+				highRisk = true;
+			}
+		}
+		else
+		{
+			cout << "Entry is not a valid symptom" << endl;
+		}
+		getline(cin, input_text);
+	}
+	cout << "Have you visited any of the following locations? yes/no" << endl;
+	vector < map<string, string> > locations = database.getRows("Locations.txt");
+	for (int i = 0; i < locations.size(); i++)
+	{
+		cout << locations[i].at("Description") << endl;
+	}
+	bool visitedLocation = false;
+	getline(cin, input_text);
+	while (!(input_text == "yes") || !(input_text == "no"))
+	{
+		cout << "Please enter yes or no" << endl;
+		getline(cin, input_text);
+	}
+	if (input_text == "yes")
+	{
+		visitedLocation = true;
+	}
+
+	if (visitedLocation || highRisk)
+	{
+		cout << "We recommend you get tested for COVID-19" << endl;
+	}
+	else
+	{
+		cout << "COVID-19 test not recommended. Isolate yourself at home." << endl;
+	}
 }

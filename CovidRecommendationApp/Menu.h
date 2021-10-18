@@ -10,6 +10,6 @@ namespace CovidRecommendationApp {
 	
 	public:
 		void displayMenu();
-		string menuSelect(char selection);
+		void menuSelect(char selection);
 	};
 }
