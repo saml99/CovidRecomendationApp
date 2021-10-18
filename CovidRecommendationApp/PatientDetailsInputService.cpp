@@ -44,6 +44,41 @@ void PatientDetailsInputService::enterDetails()
 	recommendation();
 }
 
+void PatientDetailsInputService::covidResult()
+{
+	Database database;
+	map<string, string> patientDetails;
+	string ID;
+	string TestStatus;
+	string VisitedLocations;
+
+	cout << "Enter Patient ID:" << endl;
+	cin >> ID;
+	while (!isNumber(ID))
+	{
+		cout << "Patient ID must be a number. Please try agian." << endl;
+	}
+	patientDetails.insert({ "PatientID", ID });
+	cout << "Enter test Status: (Positive/Negative)" << endl;
+	cin >> TestStatus;
+	patientDetails.insert({ "Test Status", TestStatus });
+	database.insertRow("PatientDetails.txt", patientDetails);
+
+	if (TestStatus == "Positive")
+	{
+		cout << "Enter the locations you have visited:" << endl;
+		cin >> VisitedLocations;
+
+		patientDetails.insert({ "Updated high risk locations", VisitedLocations });
+		database.insertRow("Locations.txt", patientDetails);
+	}
+	else (TestStatus == "Negative");
+	{
+		cout << "You can return to the main menu." << endl;
+	}
+
+}
+
 bool PatientDetailsInputService::isNumber(string str)
 {
 	for (char c : str)

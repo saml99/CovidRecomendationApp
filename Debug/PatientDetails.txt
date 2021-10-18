@@ -1,0 +1,2 @@
+PatientID,Name,Date of Birth,Address,LocationID,Date/Time,Last Overseas Travel,Covid Test,Status,
+5,,,,,,,,,

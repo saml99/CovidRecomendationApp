@@ -4,13 +4,14 @@
 
 using namespace std;
 
-namespace CovidRecommendationApp 
+namespace CovidRecommendationApp
 {
 
 	class PatientDetailsInputService
 	{
 	public:
 		void enterDetails();
+		void covidResult();
 	private:
 		bool isNumber(string str);
 		void recommendation();
