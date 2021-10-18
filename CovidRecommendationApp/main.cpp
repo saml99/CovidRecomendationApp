@@ -22,10 +22,10 @@ int main() {
 	//database.insertRow("Locations.txt", values1);
 	//database.insertRow("Locations.txt", values2);
 
-	//map<string, string> valuesToUpdate{ {"Status", "Alive"} };
+	//map<string, string> valuesToUpdate{ {"Statu", "Alive"} };
 	//map<string, string> map = database.getRow("PatientDetails.txt", "9");
 
-	//database.updateRow("PatientDetails.txt", "1", valuesToUpdate);
+	//database.updateRow("PatientDetails.txt", "9", valuesToUpdate);
 
 	Menu menu;
 	char selection = 0;
