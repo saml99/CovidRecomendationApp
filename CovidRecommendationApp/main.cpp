@@ -17,11 +17,11 @@ int main() {
 
 	map<string, string> values1{ {"Symptom", "fever"}, {"Risk Level", "Low Risk"} };
 	map<string, string> values2{ {"Symptom", "dry cough"}, {"Risk Level", "Low Risk"} };
-	database.insertRow("Symptoms.txt", values1);
-	database.insertRow("Symptoms.txt", values2);
+	//database.insertRow("Symptoms.txt", values1);
+	//database.insertRow("Symptoms.txt", values2);
 
 	//map<string, string> valuesToUpdate{ {"Status", "Alive"} };
-	//map = database.getRow("PatientDetails.txt", "1");
+	//map<string, string> map = database.getRow("PatientDetails.txt", "9");
 
 	//database.updateRow("PatientDetails.txt", "1", valuesToUpdate);
 
