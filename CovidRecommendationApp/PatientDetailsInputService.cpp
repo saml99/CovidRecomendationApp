@@ -144,7 +144,7 @@ void PatientDetailsInputService::recommendation()
 	}
 	bool visitedLocation = false;
 	getline(cin, input_text);
-	while (!(input_text == "yes") || !(input_text == "no")) //Check for yes or no inputs
+	while (!(input_text == "yes" || input_text == "no")) //Check for yes or no inputs
 	{
 		cout << "Please enter yes or no" << endl;
 		getline(cin, input_text);
